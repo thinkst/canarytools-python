@@ -1,0 +1,51 @@
+.field-name {
+	background-color: #59db8a;
+}
+
+div.related ul {
+	background-color: #59db8a;
+}
+
+div.sphinxsidebar h3, div.sphinxsidebar h4 {
+    background-color: #59db8a;
+}
+
+dd {
+    width: 95%;
+}
+
+h1, h2, h3 {
+    color: #4a4a4a;
+}
+
+.highlight {
+    background: #deffd9;
+}
+
+.field-name {
+    width: 15%;
+}
+
+.field-body {
+    width: 60%;
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+}
+
+.documentwrapper {
+    background: #efefef;
+}
+
+body {
+    /*font-family: Hinds, sans-serif;*/
+    font: Hind,sans-serif;
+}
+
+pre {
+    font-family: 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
+}
