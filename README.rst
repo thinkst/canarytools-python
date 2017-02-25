@@ -94,6 +94,6 @@ License
 -------
 
 The Python Canary API Wrapper's source (v1.0.0+) is provided under the `Revised BSD License
-<https://github.com/thinkst/canarytools/LICENSE.txt>`_.
+<https://github.com/thinkst/canarytools-python/blob/master/LICENSE.txt>`_.
 
 * Copyright (c), 2017, Thinkst Applied Research
