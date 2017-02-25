@@ -73,14 +73,14 @@ With the ``console`` instance you can then interact with a Canary Console:
   for incident in console.incidents.all():
       print incident.description, incident.src_host
 
-Please see the API doc's `documentation <http://praw.readthedocs.io/>`_ for
+Please see the API doc's `documentation <http://canarytools.readthedocs.io/>`_ for
 more examples of what you can do with the Canary Console API.
 
 Discussion and Support
 ---------------------------
 
 Please file bugs and feature requests as issues on `GitHub
-<https://github.com/praw-dev/praw/issues>`_ after first searching to ensure a
+<https://github.com/thinkst/canarytools-python/issues>`_ after first searching to ensure a
 similar issue was not already filed. If such an issue already exists please
 give it a thumbs up reaction. Comments to issues containing additional
 information are certainly welcome.
