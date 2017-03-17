@@ -10,10 +10,11 @@ class Incidents(object):
         """
         self.console = console
 
-    def all(self, node_id=None):
+    def all(self, node_id=None, event_limit=None):
         """Get all incidents for this console.
 
         :param node_id: Get all incidents for a specific node
+        :param event_limit: Specify the maximum number of event logs to be returned with the incident.
         :return: List of Incident objects
         :rtype: List of :class:`Incident <Incident>` objects
 
@@ -22,13 +23,14 @@ class Incidents(object):
             >>> import canarytools
             >>> incidents = console.incidents.all()
         """
-        params = {'tz': self.console.tz, 'node_id': node_id}
+        params = {'tz': self.console.tz, 'node_id': node_id, 'event_limit': event_limit}
         return self.console.get('incidents/all', params, self.parse)
 
-    def unacknowledged(self, node_id=None):
+    def unacknowledged(self, node_id=None, event_limit=None):
         """Get list of all unacknowledged incidents for a console.
 
         :param node_id: Get all unacknowledged incidents for a specific node
+        :param event_limit: Specify the maximum number of event logs to be returned with the incident.
         :return: Return list of all unacknowledged Incidents
         :rtype: List of :class:`Incident <Incident>` objects
 
@@ -37,13 +39,14 @@ class Incidents(object):
             >>> import canarytools
             >>> incidents = console.incidents.unacknowledged()
         """
-        params = {'tz': self.console.tz, 'node_id': node_id}
+        params = {'tz': self.console.tz, 'node_id': node_id, 'event_limit': event_limit}
         return self.console.get('incidents/unacknowledged', params, self.parse)
 
-    def acknowledged(self, node_id=None):
+    def acknowledged(self, node_id=None, event_limit=None):
         """Get list of all acknowledged incidents for a console.
 
         :param node_id: Get all acknowledged incidents for a specific node
+        :param event_limit: Specify the maximum number of event logs to be returned with the incident
         :return: Return list of all acknowledged incidents
         :rtype: List of :class:`Incident <Incident>` objects
 
@@ -52,7 +55,7 @@ class Incidents(object):
             >>> import canarytools
             >>> incidents = console.incidents.acknowledged()
         """
-        params = {'tz': self.console.tz, 'node_id': node_id}
+        params = {'tz': self.console.tz, 'node_id': node_id, 'event_limit': event_limit}
         return self.console.get('incidents/acknowledged', params, self.parse)
 
     def acknowledge(self, node_id=None, src_host=None, older_than=None):
