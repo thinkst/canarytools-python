@@ -37,7 +37,7 @@ class Settings(object):
         Usage::
 
             >>> import canarytools
-            >>> devices = canarytools.settings.white_ip_port(src_ip='10.0.0.2', dst_port='5000')
+            >>> devices = canarytools.settings.whitelist_ip_port(src_ip='10.0.0.2', dst_port='5000')
         """
         params = {'src_ip': src_ip, 'dst_port': dst_port}
         return self.console.post('settings/whitelist_ip_port', params)
