@@ -164,7 +164,10 @@ class Device(CanaryToolsBase):
             value = parse(value)
 
         if key in ['uptime']:
-            value = long(value)
+            try:
+                value = long(value)
+            except NameError:
+                value = int(value)
 
         if key in ['reconnect_count', 'service_count']:
             value = int(value)
