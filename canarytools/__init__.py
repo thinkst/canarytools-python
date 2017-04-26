@@ -13,11 +13,11 @@ from .models.incidents import Incident, IncidentDeviceReconnected, IncidentDevic
     Event
 from .models.canarytokens import CanaryToken, CanaryTokenKinds
 from .models.devices import Device
-from models.databundles import DataBundle
-from models.update import Update
-from models.result import Result
-from models.settings import Settings
+from .models.databundles import DataBundle
+from .models.update import Update
+from .models.result import Result
+from .models.settings import Settings
 
 
 __author__ = 'Thinkst Applied Research'
-__version__ = '1.0.0'
+__version__ = '1.0.3'
