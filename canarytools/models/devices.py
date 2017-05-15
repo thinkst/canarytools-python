@@ -161,7 +161,10 @@ class Device(CanaryToolsBase):
         # remove 'std' from key name and create datetime object from date string
         if key in ['first_seen_std', 'last_seen_std']:
             key = key[:-4]
-            value = parse(value)
+            if value:
+                value = parse(value)
+            else:
+                value = None
 
         if key in ['uptime']:
             try:

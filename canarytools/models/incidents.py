@@ -352,7 +352,10 @@ class Event(CanaryToolsBase):
 
         if 'timestamp_std' == key:
             key = key[:-4]
-            value = parse(value)
+            if value:
+                value = parse(value)
+            else:
+                value = None
 
         super(Event, self).__setattr__(key.lower(), value)
 
