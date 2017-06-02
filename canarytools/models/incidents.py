@@ -220,8 +220,10 @@ class Incident(CanaryToolsBase):
             extra processing to the JSON data. e.g. Parsing Event data
             to Event objects.
         """
-        # ignore theses attributes
-        if key not in ['console', 'id', 'summary', 'logtype', 'description', 'events', 'acknowledged']:
+        # Set only specified fields as attributes
+        if key not in ['console', 'id', 'description', 'summary', 'logtype', 'events', \
+                       'acknowledged', 'dst_host', 'src_host', 'node_id', 'dst_port', \
+                       'src_port']:
             return
 
         # if the key is events parse list of events parse events
