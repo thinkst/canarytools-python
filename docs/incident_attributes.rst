@@ -1,17 +1,12 @@
 .. _incidents-events-ref:
 
-Incidents and event attribute
+Incidents and event attributes
 ********************************
 
-Each log entry is termed an event, and consists of actions such as a single SSH login attempt, or a single POST to a web site, or a single SIP request. An event will result in an incident being created, but subsequent similar events from the same source will be bundle together if they occur in close proximity. This means that if someone launches a brute-force attack, there is a single incident created with an event assigned to each login attempt.
+An incident is an alert that gets fired. This groups together any number of events that are worth alerting on. A single SSH Login Attempt incident can be made up of multiple attempts to use different username and password combinations against a Canary. Likewise a single HTTP Login Attempt incident, can be made up of multiple HTTP POST events to a Canary website. The events are bundled together if they occur within a short time of each other and from a single attacker. Brute force attempts on a service then gets grouped together into an incident.
 
-The incident object contains a record of the individual events that constitute the incident.
+Each incident object has an **events** attribute storing its list of :class:`Event <Event>` objects. This page describes the different attributes events have depending on their type. Each event also contains an "updated_std" timestamp field, which is omitted for brevity below.
 
-The "events" attribute of each incident object contains a list of :class:`Event <Event>` objects.
-object
-Every :class:`Event <Event>` entry contains an "updated_std" timestamp field, and it's left out of the definitions below.
-
-This page describes the different attributes an event may have depending on their type.
 
 Canarytokens incidents
 ========================
@@ -24,7 +19,7 @@ HTTP
 
 The :class:`Event <Event>` object in this scenario will have the following attributes:
 
-**Attributes:**
+**Event Attributes:**
     - **description** -- "Canarytoken triggered"
     - **type (str)** -- "http"
     - **canarytoken (str)** -- Unique string that acts as the Canarytoken
@@ -37,7 +32,7 @@ DNS
 
 The :class:`Event <Event>` object in this scenario will have the following attributes:
 
-**Attributes:**
+**Event Attributes:**
     - **description** -- "Canarytoken triggered"
     - **type (str)** -- "dns"
     - **canarytoken (str)** -- Unique string that acts as the Canarytoken
@@ -109,7 +104,7 @@ Event is generated when a Canary does not contact the console within a defined t
 
 The :class:`Event <Event>` object in this scenario will have the following attributes:
 
-**Attributes:**
+**Incident Attributes:**
     - **description** -- "Canary Disconnected"
     - **logtype (str)** -- "1004"
 
@@ -118,11 +113,13 @@ FTP Incident
 
 The :class:`Event <Event>` object in this scenario will have the following attributes:
 
-**Attributes:**
-    - **description** -- "FTP Login Attemp"
+**Incident Attributes:**
+    - **description** -- "FTP Login Attempt"
+    - **logtype (str)** -- "2000"
+
+**Event Attributes:**
     - **username (list)** -- Attacker supplied username.
     - **password (list** --  Attacked supplied password.
-    - **logtype (str)** -- "2000"
 
 
 Git Repository Clone Attempt
@@ -131,11 +128,13 @@ Triggered when an attacker connects to the Canary git service and attempts any r
 
 The :class:`Event <Event>` object in this scenario will have the following attributes:
 
-**Attributes:**
+**Incident Attributes:**
     - **description** -- "Git Repository Clone Attempt"
+    - **logtype (str)** -- "19001"
+
+**Event Attributes:**
     - **host (list)** -- Git client's view of the Canary's hostname.
     - **repo (str)** -- Name of the repository the client attempted to clone.
-    - **logtype (str)** -- "19001"
 
 
 HTTP Incidents
@@ -150,12 +149,14 @@ HTTP Page Load
 
 The :class:`Event <Event>` object in this scenario will have the following attributes:
 
-**Attributes:**
+**Incident Attributes:**
     - **description** -- "HTTP Page Load"
+    - **logtype (str)** -- "3000"
+
+**Event Attributes:**
     - **path (list)** -- Web path requested by the source.
     - **useragent (str)** -- Useragent of the source's browser.
     - **channel (str)** -- Optional. Set to 'TLS' if an encrypted site is configured, otherwise absent.
-    - **logtype (str)** -- "3000"
 
 
 HTTP Login Attempt
@@ -163,14 +164,16 @@ HTTP Login Attempt
 
 The :class:`Event <Event>` object in this scenario will have the following attributes:
 
-**Attributes:**
+**Incident Attributes:**
     - **description** -- "HTTP Login Attempt"
+    - **logtype (str)** -- "3001"
+
+**Event Attributes:**
     - **username (str)** -- Attack supplied username.
     - **password (str)** -- Attacked supplied password.
     - **path (list)** -- Web path requested by the source.
     - **useragent (str)** -- Useragent of the source's browser.
     - **channel (str)** -- Optional. Set to 'TLS' if an encrypted site is configured, otherwise absent.
-    - **logtype (str)** -- "3001"
 
 
 HTTP Proxy Request
@@ -179,13 +182,15 @@ Triggered by any request through the HTTP proxy module.
 
 The :class:`Event <Event>` object in this scenario will have the following attributes:
 
-**Attributes:**
+**Incident Attributes:**
     - **description** -- "HTTP Proxy Request"
+    - **logtype (str)** -- "7001"
+
+**Event Attributes:**
     - **username (str)** -- Attack supplied username.
     - **password (str)** -- Attacked supplied password.
     - **url (str)** -- URL requested by the source.
     - **useragent (str)** -- Useragent of the source's browser.
-    - **logtype (str)** -- "7001"
 
 
 MSSQL Login Attempt
@@ -196,15 +201,17 @@ SQL Server supports multiple authentication modes, and the fields that come thro
 
 The :class:`Event <Event>` object in this scenario will have the following attributes:
 
-**Attributes:**
+**Incident Attributes:**
     - **description** -- "MSSQL Login Attempt"
+    - **logtype (str)** -- "9001" - SQL Server authentication.
+    - **logtype (str)** -- "9002" - Windows authentication.
+
+
+**Event Attributes:**
     - **username (str)** -- Attack supplied username.
     - **password (str)** -- Optional. Attacker supplied database password
     - **hostname (str)** -- Optional. Attacker supplied hostname.
     - **domainname (str)** -- Optional. Attacker supplied Active Directory name.
-    - **logtype (str)** -- "9001" - SQL Server authentication.
-    - **logtype (str)** -- "9002" - Windows authentication.
-
 
 ModBus Request
 =================
@@ -214,16 +221,19 @@ Triggered by any valid ModBus request.
 
 The :class:`Event <Event>` object in this scenario will have the following attributes:
 
-**Attributes:**
+**Incident Attributes:**
     - **description** -- "ModBus Request"
+    - **logtype (str)** -- "18001" (Modbus Query Function)
+    - **logtype (str)** -- "18002" (Modbus Read Function)
+    - **logtype (str)** -- "18003" (Modbus Write Function)
+
+
+**Event Attributes:**
     - **unit_id (str)** -- ModBus unit target.
     - **func_code (str)** -- ModBus function code.
     - **func_name (str)** -- Optional. ModBus function name, if available.
     - **sfunc_code (str)** -- Optional. ModBus subfunction code, if available.
     - **sfunc_nmae (str)** -- Optional. ModBus subfunction name, if available.
-    - **logtype (str)** -- "18001" (Modbus Query Function)
-    - **logtype (str)** -- "18002" (Modbus Read Function)
-    - **logtype (str)** -- "18003" (Modbus Write Function)
 
 MySQL Login Attempt
 ======================
@@ -233,13 +243,15 @@ The client sends a hashed password, not a cleartext password. The Canary will tr
 
 The :class:`Event <Event>` object in this scenario will have the following attributes:
 
-**Attributes:**
+**Incident Attributes:**
     - **description** -- "MySQL Login Attempt"
+    - **logtype (str)** -- "8001
+
+**Event Attributes:**
     - **username (str)** -- Attacker supplied database username.
     - **client_hash (str)** -- Attacker supplied database password hash.
     - **salt (str)** -- Attacker supplied database password hash salt.
     - **password (str)** -- Recovered password if possible, otherwise '<Password not in common list>'
-    - **logtype (str)** -- "8001
 
 
 NTP Monlist Request
@@ -248,13 +260,16 @@ Triggered by the NTP Monlist command.
 
 The :class:`Event <Event>` object in this scenario will have the following attributes:
 
-**Attributes:**
+**Incident Attributes:**
     - **description** -- "NTP Monlist Request"
+    - **logtype (str)** -- "11001
+
+**Event Attributes:**
     - **ntp_cmd (str)** -- Name of the NTP command sent. Currently is 'monlist'.
     - **client_hash (str)** -- Attacker supplied database password hash.
     - **salt (str)** -- Attacker supplied database password hash salt.
     - **password (str)** -- Recovered password if possible, otherwise '<Password not in common list>'
-    - **logtype (str)** -- "11001
+
 
 
 Redis Command
@@ -265,11 +280,13 @@ Triggered by an attacker connecting to the Redis service and issuing valid Redis
 
 The :class:`Event <Event>` object in this scenario will have the following attributes:
 
-**Attributes:**
+**Incident Attributes:**
     - **description** -- "NTP Monlist Request"
+    - **logtype (str)** -- "21001
+
+**Event Attributes:**
     - **cmd (str)** -- Redis command issued by the attacker.
     - **args (str)** -- Arguments to the command.
-    - **logtype (str)** -- "21001
 
 
 SIP Request
@@ -278,11 +295,13 @@ Triggered by an attacker connecting to the SIP service and issuing valid SIP req
 
 The :class:`Event <Event>` object in this scenario will have the following attributes:
 
-**Attributes:**
+**Incident Attributes:**
     - **description** -- "SIP Request"
+    - **logtype (str)** -- "15001
+
+**Event Attributes:**
     - **headers (dict)** -- Dict of the SIP headers included in the request.
     - **args (str)** -- Arguments to the command.
-    - **logtype (str)** -- "15001
 
 
 Shared File Opened
@@ -292,8 +311,11 @@ Triggered by the opening of a file on the Canary's Windows File Share.
 
 The :class:`Event <Event>` object in this scenario will have the following attributes:
 
-**Attributes:**
+**Incident Attributes:**
     - **description** -- "Shared File Opened"
+    - **logtype (str)** -- "5000
+
+**Event Attributes:**
     - **user (str)** --  Username supplied by the attacker.
     - **filename (str)** -- Name of file on the Canary that was accessed.
     - **auditaction (str)** -- Type of file action. Currently only 'pread'.
@@ -307,7 +329,6 @@ The :class:`Event <Event>` object in this scenario will have the following attri
     - **smbarch (str)** -- Guess of the remote machine's Windows version.
     - **smbver (str)** -- Version of the SMB protocol that was used.
     - **status (str)** -- Result of the file read. Currently only 'ok'.
-    - **logtype (str)** -- "5000
 
 
 SNMP Request
@@ -316,11 +337,13 @@ Triggered by an incoming SNMP query against the Canary.
 
 The :class:`Event <Event>` object in this scenario will have the following attributes:
 
-**Attributes:**
+**Incident Attributes:**
     - **description** -- "SNMP Request"
+    - **logtype (str)** -- "13001"
+
+**Event Attributes:**
     - **community_string (str)** -- SNMP community string supplied by attacker.
     - **requests (str)** -- SNMP OID requested by the attacker.
-    - **logtype (str)** -- "13001"
 
 SSH Login Attempt
 ===================
@@ -330,15 +353,17 @@ It is also possible to configure "Watched Credentials", which says to only alert
 
 The :class:`Event <Event>` object in this scenario will have the following attributes:
 
-**Attributes:**
+**Incident Attributes:**
     - **description** -- "SSH Login Attempt"
-    - **username (str)** -- SNMP community string supplied by attacker.
-    - **password (str)** -- SNMP OID requested by the attacker.
-    - **localversion (str)** -- SNMP community string supplied by attacker.
-    - **remoteversion (str)** -- SNMP OID requested by the attacker.
-    - **key (str)** -- SNMP community string supplied by attacker.
-    - **watched_credentials (str)** -- SNMP OID requested by the attacker.
     - **logtype (str)** -- "4002"
+
+**Event Attributes:**
+    - **username (str)** -- SSH username
+    - **password (str)** -- SSH password
+    - **localversion (str)** -- SSH server string supplied by canary.
+    - **remoteversion (str)** -- SSH client string supplied by the attacker.
+    - **key (str)** -- SSH key used by attacker.
+    - **watched_credentials (str)** -- Indicates whether this an SSH key watched for.
 
 Custom TCP Service Request
 ============================
@@ -348,8 +373,11 @@ The Custom TCP Service module let's the Canary administrator create simple servi
 
 The :class:`Event <Event>` object in this scenario will have the following attributes:
 
-**Attributes:**
+
+**Incident Attributes:**
     - **description** -- "Custom TCP Service Request"
+
+**Event Attributes:**
     - **banner_id (str)** -- Multiple banners are supported, the id identifies which banner service was triggered.
     - **data (str)** -- Optional. Attacker's supplied data.
     - **function (str)** -- Indicates which trigger fired, either 'DATA_RECEIVED' for when a banner was sent after the attacker sent data, or 'CONNECTION_MADE' for when a banner was sent immediately on connection.
@@ -362,11 +390,13 @@ Triggered by a TFTP request against the Canary.
 
 The :class:`Event <Event>` object in this scenario will have the following attributes:
 
-**Attributes:**
+**Incident Attributes:**
     - **description** -- "TFTP Request"
+    - **logtype (str)** -- "10001"
+
+**Event Attributes:**
     - **filename (str)** -- Name of file the attacker tried to act on.
     - **opcode (str)** -- File action, either 'READ' or 'WRITE'
-    - **logtype (str)** -- "10001"
 
 
 Telnet Login Attempt
@@ -375,11 +405,13 @@ Triggered by a Telnet authentication attempt.
 
 The :class:`Event <Event>` object in this scenario will have the following attributes:
 
-**Attributes:**
+**Incident Attributes:**
     - **description** -- "Telnet Login Attempt"
+    - **logtype (str)** -- "6001"
+
+**Event Attributes:**
     - **username (str)** -- Attacker supplied username.
     - **password (str)** -- Attacker supplied password.
-    - **logtype (str)** -- "6001"
 
 VNC Login Attempt
 ====================
@@ -387,12 +419,11 @@ Triggered by an attempt to login to Canary's password protected VNC service.
 
 VNC passwords are not transmitted in the clear. Instead a hashed version is sent. The Canary will test the hashed password against a handful of common passwords to guess the password, but the hash parameters are also reported so the administrator can crack the hash on more powerful rigs.
 
-The :class:`Event <Event>` object in this scenario will have the following attributes:
-
-**Attributes:**
+**Incident Attributes:**
     - **description** -- "VNC Login Attempt"
+    - **logtype (str)** -- "12001"
+
+**Event Attributes:**
     - **password (str)** -- Cracked password if very weak.
     - **server_challenge (str)** -- VNC password hashing parameter.
     - **client_response (str)** -- VNC password hashing parameter.
-    - **logtype (str)** -- "12001"
-
