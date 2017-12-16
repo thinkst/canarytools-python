@@ -10,7 +10,6 @@ Each incident object has an **events** attribute storing its list of :class:`Eve
 
 Canarytokens incidents
 ========================
-Note: this incident type is forthcoming in Canary 2.0.
 
 There are two types of Canarytokens, HTTP and DNS.
 
@@ -43,7 +42,7 @@ Port Scans
 ==============
 There are five types of port scans incidents.
 
-#. A host port scan is occurs when a single Canary is port scanned by a single source.
+#. A host port scan occurs when a single Canary is port scanned by a single source.
 #. A consolidated network port scan occurs when multiple Canaries are scanned by a single source.
 #. An NMAP NULL scan was run against the Canary.
 #. An NMAP OS scan was run against the Canary.
@@ -102,7 +101,7 @@ Canary Disconnected
 ======================
 Event is generated when a Canary does not contact the console within a defined time period.
 
-The :class:`Event <Event>` object in this scenario will have the following attributes:
+The :class:`Incident <Incident>` object in this scenario will have the following attributes:
 
 **Incident Attributes:**
     - **description** -- "Canary Disconnected"
@@ -111,7 +110,7 @@ The :class:`Event <Event>` object in this scenario will have the following attri
 FTP Incident
 ==============
 
-The :class:`Event <Event>` object in this scenario will have the following attributes:
+The :class:`Incident <Incident>` and :class:`Event <Event>` objects will have the following attributes:
 
 **Incident Attributes:**
     - **description** -- "FTP Login Attempt"
@@ -126,7 +125,7 @@ Git Repository Clone Attempt
 =============================
 Triggered when an attacker connects to the Canary git service and attempts any repo clone.
 
-The :class:`Event <Event>` object in this scenario will have the following attributes:
+The :class:`Incident <Incident>` and :class:`Event <Event>` objects will have the following attributes:
 
 **Incident Attributes:**
     - **description** -- "Git Repository Clone Attempt"
@@ -147,7 +146,7 @@ Two types of HTTP Incidents:
 HTTP Page Load
 -----------------
 
-The :class:`Event <Event>` object in this scenario will have the following attributes:
+The :class:`Incident <Incident>` and :class:`Event <Event>` objects will have the following attributes:
 
 **Incident Attributes:**
     - **description** -- "HTTP Page Load"
@@ -162,7 +161,7 @@ The :class:`Event <Event>` object in this scenario will have the following attri
 HTTP Login Attempt
 --------------------
 
-The :class:`Event <Event>` object in this scenario will have the following attributes:
+The :class:`Incident <Incident>` and :class:`Event <Event>` objects will have the following attributes:
 
 **Incident Attributes:**
     - **description** -- "HTTP Login Attempt"
@@ -180,7 +179,7 @@ HTTP Proxy Request
 =====================
 Triggered by any request through the HTTP proxy module.
 
-The :class:`Event <Event>` object in this scenario will have the following attributes:
+The :class:`Incident <Incident>` and :class:`Event <Event>` objects will have the following attributes:
 
 **Incident Attributes:**
     - **description** -- "HTTP Proxy Request"
@@ -193,13 +192,13 @@ The :class:`Event <Event>` object in this scenario will have the following attri
     - **useragent (str)** -- Useragent of the source's browser.
 
 
-MSSQL Login Attempt
-=====================
-Triggered by any attempt to authenticate to the MS-SQL Server module.
+Microsoft SQL Server Login Attempt
+===================================
+Triggered by any attempt to authenticate to the Microsoft SQL Server module.
 
 SQL Server supports multiple authentication modes, and the fields that come through depend on the mode.
 
-The :class:`Event <Event>` object in this scenario will have the following attributes:
+The :class:`Incident <Incident>` and :class:`Event <Event>` objects will have the following attributes:
 
 **Incident Attributes:**
     - **description** -- "MSSQL Login Attempt"
@@ -215,11 +214,10 @@ The :class:`Event <Event>` object in this scenario will have the following attri
 
 ModBus Request
 =================
-Note: this incident is forthcoming in Canary 2.0.
 
 Triggered by any valid ModBus request.
 
-The :class:`Event <Event>` object in this scenario will have the following attributes:
+The :class:`Incident <Incident>` and :class:`Event <Event>` objects will have the following attributes:
 
 **Incident Attributes:**
     - **description** -- "ModBus Request"
@@ -241,7 +239,7 @@ Triggered by an authentication attempt against the MySQL service.
 
 The client sends a hashed password, not a cleartext password. The Canary will try crack the hash with passwords one might expect in a brute-force.
 
-The :class:`Event <Event>` object in this scenario will have the following attributes:
+The :class:`Incident <Incident>` and :class:`Event <Event>` objects will have the following attributes:
 
 **Incident Attributes:**
     - **description** -- "MySQL Login Attempt"
@@ -258,7 +256,7 @@ NTP Monlist Request
 ======================
 Triggered by the NTP Monlist command.
 
-The :class:`Event <Event>` object in this scenario will have the following attributes:
+The :class:`Incident <Incident>` and :class:`Event <Event>` objects will have the following attributes:
 
 **Incident Attributes:**
     - **description** -- "NTP Monlist Request"
@@ -274,14 +272,13 @@ The :class:`Event <Event>` object in this scenario will have the following attri
 
 Redis Command
 ===============
-Note: this incident type is forthcoming in Canary 2.0.
 
 Triggered by an attacker connecting to the Redis service and issuing valid Redis commands.
 
-The :class:`Event <Event>` object in this scenario will have the following attributes:
+The :class:`Incident <Incident>` and :class:`Event <Event>` objects will have the following attributes:
 
 **Incident Attributes:**
-    - **description** -- "NTP Monlist Request"
+    - **description** -- "Redis Command"
     - **logtype (str)** -- "21001
 
 **Event Attributes:**
@@ -293,7 +290,7 @@ SIP Request
 =============
 Triggered by an attacker connecting to the SIP service and issuing valid SIP request.
 
-The :class:`Event <Event>` object in this scenario will have the following attributes:
+The :class:`Incident <Incident>` and :class:`Event <Event>` objects will have the following attributes:
 
 **Incident Attributes:**
     - **description** -- "SIP Request"
@@ -309,7 +306,7 @@ Shared File Opened
 Triggered by the opening of a file on the Canary's Windows File Share.
 
 
-The :class:`Event <Event>` object in this scenario will have the following attributes:
+The :class:`Incident <Incident>` and :class:`Event <Event>` objects will have the following attributes:
 
 **Incident Attributes:**
     - **description** -- "Shared File Opened"
@@ -335,7 +332,7 @@ SNMP Request
 ===============
 Triggered by an incoming SNMP query against the Canary.
 
-The :class:`Event <Event>` object in this scenario will have the following attributes:
+The :class:`Incident <Incident>` and :class:`Event <Event>` objects will have the following attributes:
 
 **Incident Attributes:**
     - **description** -- "SNMP Request"
@@ -351,7 +348,7 @@ Triggered by an attempt to login to the Canary using SSH. Both password-based an
 
 It is also possible to configure "Watched Credentials", which says to only alert if the attacker-supplied credentials match a configured list.
 
-The :class:`Event <Event>` object in this scenario will have the following attributes:
+The :class:`Incident <Incident>` and :class:`Event <Event>` objects will have the following attributes:
 
 **Incident Attributes:**
     - **description** -- "SSH Login Attempt"
@@ -367,11 +364,10 @@ The :class:`Event <Event>` object in this scenario will have the following attri
 
 Custom TCP Service Request
 ============================
-Note: this incident type is forthcoming in Canary 2.0.
 
 The Custom TCP Service module let's the Canary administrator create simple services that either immediately print a banner on connection, or wait for the client to send data before responding.
 
-The :class:`Event <Event>` object in this scenario will have the following attributes:
+The :class:`Incident <Incident>` and :class:`Event <Event>` objects will have the following attributes:
 
 
 **Incident Attributes:**
@@ -388,7 +384,7 @@ TFTP Request
 ==============
 Triggered by a TFTP request against the Canary.
 
-The :class:`Event <Event>` object in this scenario will have the following attributes:
+The :class:`Incident <Incident>` and :class:`Event <Event>` objects will have the following attributes:
 
 **Incident Attributes:**
     - **description** -- "TFTP Request"
@@ -403,7 +399,7 @@ Telnet Login Attempt
 =======================
 Triggered by a Telnet authentication attempt.
 
-The :class:`Event <Event>` object in this scenario will have the following attributes:
+The :class:`Incident <Incident>` and :class:`Event <Event>` objects will have the following attributes:
 
 **Incident Attributes:**
     - **description** -- "Telnet Login Attempt"
