@@ -200,3 +200,4 @@ class CanaryTokenKinds(object):
     DOC_MSWORD = 'doc-msword'
     WEB_IMAGE = 'web-image'
     WINDOWS_DIR = 'windows-dir'
+    AWS = 'aws-id'
