@@ -64,7 +64,7 @@ With the ``console`` instance you can then interact with a Canary Console:
 
   # Create a web image Canarytoken
   console.tokens.create(
-      kind=canarytools.TokenKind.KIND_WEB_IMAGE,
+      kind=canarytools.CanaryTokenKinds.KIND_WEB_IMAGE,
       memo='Drop this token on DC box',
       web_image='/path/to/test.png',
       mimetype='image/png')
