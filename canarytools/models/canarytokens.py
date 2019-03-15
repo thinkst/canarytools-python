@@ -62,7 +62,7 @@ class CanaryTokens(object):
         params = {'canarytoken': canarytoken}
         return self.console.get('canarytoken/fetch', params, self.parse)
 
-    def all(self):
+    def all(self, include_endpoints=True):
         """Fetch all Canarytokens
 
         :return: A list of Canarytoken objects
@@ -75,7 +75,7 @@ class CanaryTokens(object):
             >>> import canarytools
             >>> tokens = console.tokens.all()
         """
-        params = {}
+        params = {'include_endpoints':str(include_endpoints)}
         return self.console.get('canarytokens/fetch', params, self.parse)
 
     def parse(self, data):
