@@ -511,6 +511,30 @@ class IncidentNetworkPortScan(Incident):
 class IncidentConsolidatedNetworkPortScan(Incident):
     """Consolidated Network Port Scan"""
 
+class IncidentConsoleSettingsChange(Incident):
+    """Console Settings Changed"""
+
+class IncidentDeviceSettingsChange(Incident):
+    """Device Settings Changed"""
+
+class IncidentFlockSettingsChange(Incident):
+    """Flock Settings Changed"""
+
+class IncidentSettingsRollback(Incident):
+    """Device Setting Rollback Detected"""
+
+class IncidentThrottleNotifications(Incident):
+    """Canary Alert Throttling Detected"""
+
+class IncidentTokenThrottleNotifications(Incident):
+    """Canarytoken Alerts Throttling Detected"""
+
+class IncidentNmapFINScan(Incident):
+    """NMAP FIN Scan Detected"""
+
+class IncidentSMBLogin(Incident):
+    """File Share Login Attempt"""
+
 INCIDENT_MAP = {
     'Default':                          Incident,
     'Canary Reconnected':               IncidentDeviceReconnected,
@@ -541,4 +565,12 @@ INCIDENT_MAP = {
     'Host Port Scan':                   IncidentHostPortScan,
     'Network Port Scan':                IncidentNetworkPortScan,
     'Consolidated Network Port Scan':   IncidentConsolidatedNetworkPortScan,
+    'Console Settings Changed':         IncidentConsoleSettingsChange,
+    'Device Settings Changed':          IncidentDeviceSettingsChange,
+    'Flock Settings Changed':           IncidentFlockSettingsChange,
+    'Device Setting Rollback Detected': IncidentSettingsRollback,
+    'Canary Alert Throttling Detected': IncidentThrottleNotifications,
+    'Canarytoken Alerts Throttling Detected':IncidentTokenThrottleNotifications,
+    'File Share Login Attempt':         IncidentSMBLogin,
+    'NMAP FIN Scan Detected':           IncidentNmapFINScan
 }

@@ -148,14 +148,14 @@ class Console(object):
             self.log('[{datetime}] GET to {ROOT}{url}.json: {params}'.format(
                 datetime=datetime.now(self.tz), ROOT=ROOT, url=url, params=params))
             start = time.time()
-            r = self.session.get(url="{0}{1}".format(ROOT, url), params=params)
+            resp = self.session.get(url="{0}{1}".format(ROOT, url), params=params)
             complete = time.time() - start
             self.log(
                 '[{datetime}] Received {response_code} in {:.2f}ms: '.format(
-                    complete * 1000, datetime=datetime.now(self.tz), response_code=r.status_code), data=r.text)
+                    complete * 1000, datetime=datetime.now(self.tz), response_code=resp.status_code), data=resp.text)
         except requests.exceptions.ConnectionError:
             self.throw_connection_error()
-        return self.handle_response(r.json(), parser)
+        return self.handle_response(resp.json(), parser)
 
     def delete(self, url, params, parser=None):
         """Delete request
@@ -166,7 +166,8 @@ class Console(object):
         :return: Object(s) or a Result Indicator Object
         """
         try:
-            self.log('[{datetime}] DELETE to {ROOT}{url}.json: {params}'.format(ROOT=ROOT, url=url, params=params))
+            self.log('[{datetime}] DELETE to {ROOT}{url}.json: {params}'.format(
+                datetime=datetime.now(self.tz), ROOT=ROOT, url=url, params=params))
             start = time.time()
             r = self.session.delete(url="{0}{1}".format(ROOT, url), params=params)
             complete = time.time() - start
