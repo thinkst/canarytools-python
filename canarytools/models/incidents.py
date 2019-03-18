@@ -523,17 +523,9 @@ class IncidentFlockSettingsChange(Incident):
 class IncidentSettingsRollback(Incident):
     """Device Setting Rollback Detected"""
 
-class IncidentThrottleNotifications(Incident):
-    """Canary Alert Throttling Detected"""
-
-class IncidentTokenThrottleNotifications(Incident):
-    """Canarytoken Alerts Throttling Detected"""
-
 class IncidentNmapFINScan(Incident):
     """NMAP FIN Scan Detected"""
 
-class IncidentSMBLogin(Incident):
-    """File Share Login Attempt"""
 
 INCIDENT_MAP = {
     'Default':                          Incident,
@@ -569,8 +561,5 @@ INCIDENT_MAP = {
     'Device Settings Changed':          IncidentDeviceSettingsChange,
     'Flock Settings Changed':           IncidentFlockSettingsChange,
     'Device Setting Rollback Detected': IncidentSettingsRollback,
-    'Canary Alert Throttling Detected': IncidentThrottleNotifications,
-    'Canarytoken Alerts Throttling Detected':IncidentTokenThrottleNotifications,
-    'File Share Login Attempt':         IncidentSMBLogin,
     'NMAP FIN Scan Detected':           IncidentNmapFINScan
 }

@@ -9,12 +9,12 @@ Each incident object has an **events** attribute storing its list of :class:`Eve
 
 
 Canarytokens incidents
-========================
+======================
 
 There are two types of Canarytokens, HTTP and DNS.
 
 HTTP
-------
+----
 
 The :class:`Event <Event>` object in this scenario will have the following attributes:
 
@@ -26,20 +26,272 @@ The :class:`Event <Event>` object in this scenario will have the following attri
     - **url (str)** -- URL of the HTTP Canarytoken.
     - **logtype (str)** -- "17000"
 
-DNS
-------
+Web Image
+---------
+
+The :class:`Event <Event>` object in this scenario will have the following attributes:
+
+**Event Attributes:**
+    - **description** -- "Remote Web Image"
+    - **type (str)** -- "web-image"
+    - **canarytoken (str)** -- Unique string that acts as the Canarytoken
+    - **headers (dict)** -- Headers is a dict, Only present for HTTP Canarytokens.
+    - **url (str)** -- URL of the HTTP Canarytoken.
+    - **logtype (str)** -- "17001"
+    - **web_image (str)** -- Byte string of the web image
+    - **web_image_type (str)** -- Type of the web image
+    - **web_image_name (str)** -- Name of the web image
+
+MS Word Doc
+-----------
 
 The :class:`Event <Event>` object in this scenario will have the following attributes:
 
 **Event Attributes:**
     - **description** -- "Canarytoken triggered"
+    - **type (str)** -- "doc-msword"
+    - **canarytoken (str)** -- Unique string that acts as the Canarytoken
+    - **headers (dict)** -- Headers is a dict, Only present for HTTP Canarytokens.
+    - **url (str)** -- URL of the HTTP Canarytoken.
+    - **logtype (str)** -- "17002"
+    - **doc (str)** -- Byte String of the tokened document 
+    - **doc_name (str)** -- Name of the document tokened (or created)
+    - **doc_type (str)** -- Type of document chosen (doc or docx)
+
+Cloned Site
+-----------
+
+The :class:`Event <Event>` object in this scenario will have the following attributes:
+
+**Event Attributes:**
+    - **description** -- "Cloned Website"
+    - **type (str)** -- "cloned-web"
+    - **canarytoken (str)** -- Unique string that acts as the Canarytoken
+    - **headers (dict)** -- Headers is a dict, Only present for HTTP Canarytokens.
+    - **url (str)** -- URL of the HTTP Canarytoken.
+    - **logtype (str)** -- "17003"
+    - **cloned_web (str) ** -- Domain that we are tokening
+
+AWS S3
+------
+
+The :class:`Event <Event>` object in this scenario will have the following attributes:
+
+**Event Attributes:**
+    - **description** -- "Amazon S3"
+    - **type (str)** -- "aws-s3"
+    - **canarytoken (str)** -- Unique string that acts as the Canarytoken
+    - **headers (dict)** -- Headers is a dict, Only present for HTTP Canarytokens.
+    - **url (str)** -- URL of the HTTP Canarytoken.
+    - **logtype (str)** -- "17005"
+    - **s3_source_bucket (str)** -- bucket that we are tokening
+    - **s3_log_bucket (str)** -- bucket where logging to stored and monitored
+    - **online (str)** -- Whether the token is online or not
+
+Google docs
+-----------
+
+The :class:`Event <Event>` object in this scenario will have the following attributes:
+
+**Event Attributes:**
+    - **description** -- "Google Document"
+    - **type (str)** -- "google-docs"
+    - **canarytoken (str)** -- Unique string that acts as the Canarytoken
+    - **headers (dict)** -- Headers is a dict, Only present for HTTP Canarytokens.
+    - **url (str)** -- URL of the HTTP Canarytoken.
+    - **logtype (str)** -- "17006"
+    - **docs_link (str)** -- url to the google doc
+    - **email_link (str)** -- url used for email
+    - **document_name (str)** -- Name of the document
+
+Google sheets
+-------------
+
+The :class:`Event <Event>` object in this scenario will have the following attributes:
+
+**Event Attributes:**
+    - **description** -- "Google Sheet"
+    - **type (str)** -- "google-sheets"
+    - **canarytoken (str)** -- Unique string that acts as the Canarytoken
+    - **headers (dict)** -- Headers is a dict, Only present for HTTP Canarytokens.
+    - **url (str)** -- URL of the HTTP Canarytoken.
+    - **logtype (str)** -- "17007"
+    - **docs_link (str)** -- url to the google doc
+    - **email_link (str)** -- url used for email
+    - **document_name (str)** -- Name of the document
+
+Signed EXE
+----------
+
+The :class:`Event <Event>` object in this scenario will have the following attributes:
+
+**Event Attributes:**
+    - **description** -- "Signed Exe"
+    - **type (str)** -- "signed-exe"
+    - **canarytoken (str)** -- Unique string that acts as the Canarytoken
+    - **headers (dict)** -- Headers is a dict, Only present for HTTP Canarytokens.
+    - **url (str)** -- URL of the HTTP Canarytoken.
+    - **logtype (str)** -- "17008"
+    - **exe (str)** -- Byte string of the tokened exe
+    - **exe_name (str)** -- Name of the exe
+    - **exe_type (str)** -- Type of the exe
+
+QR Code
+-------
+
+The :class:`Event <Event>` object in this scenario will have the following attributes:
+
+**Event Attributes:**
+    - **description** -- "QR Code"
+    - **type (str)** -- "qr-code"
+    - **canarytoken (str)** -- Unique string that acts as the Canarytoken
+    - **headers (dict)** -- Headers is a dict, Only present for HTTP Canarytokens.
+    - **url (str)** -- URL of the HTTP Canarytoken.
+    - **logtype (str)** -- "17009"
+    - **qr_code (str)** -- Byte string of the tokened QR code
+
+SVN
+---
+
+The :class:`Event <Event>` object in this scenario will have the following attributes:
+
+**Event Attributes:**
+    - **description** -- "SVN Repo"
+    - **type (str)** -- "svn"
+    - **canarytoken (str)** -- Unique string that acts as the Canarytoken
+    - **headers (dict)** -- Headers is a dict, Only present for HTTP Canarytokens.
+    - **url (str)** -- URL of the HTTP Canarytoken.
+    - **logtype (str)** -- "17010"
+
+SQL
+---
+
+The :class:`Event <Event>` object in this scenario will have the following attributes:
+
+**Event Attributes:**
+    - **description** -- "SQL Server"
+    - **type (str)** -- "sql"
+    - **canarytoken (str)** -- Unique string that acts as the Canarytoken
+    - **headers (dict)** -- Headers is a dict, Only present for HTTP Canarytokens.
+    - **url (str)** -- URL of the HTTP Canarytoken.
+    - **logtype (str)** -- "17011"
+    - **trigger_type (str)** -- SQL trigger type (SELECT, UPDATE, INSERT, DELETE)
+    - **table_name (str)** -- SQL table name (trigger_type: UPDATE, INSERT,DELETE)
+    - **trigger_name (str)** -- SQL trigger name (trigger_type: UPDATE, INSERT,DELETE)
+    - **view_name (str)** -- SQL View name (trigger_type: SELECT)
+    - **function_name (str)** -- SQL function name (trigger_type: SELECT)
+
+AWS ID
+------
+
+The :class:`Event <Event>` object in this scenario will have the following attributes:
+
+**Event Attributes:**
+    - **description** -- "Amazon API Key"
+    - **type (str)** -- "aws-id"
+    - **canarytoken (str)** -- Unique string that acts as the Canarytoken
+    - **headers (dict)** -- Headers is a dict, Only present for HTTP Canarytokens.
+    - **url (str)** -- URL of the HTTP Canarytoken.
+    - **logtype (str)** -- "17012"
+    - **secret_access_key (str)** -- AWS generated secret access key
+    - **access_key_id (str)** -- AWS generated access key ID
+
+Fast Redirect
+-------------
+
+The :class:`Event <Event>` object in this scenario will have the following attributes:
+
+**Event Attributes:**
+    - **description** -- "Fast HTTP Redirect"
+    - **type (str)** -- "fast-redirect"
+    - **canarytoken (str)** -- Unique string that acts as the Canarytoken
+    - **headers (dict)** -- Headers is a dict, Only present for HTTP Canarytokens.
+    - **url (str)** -- URL of the HTTP Canarytoken.
+    - **logtype (str)** -- "17016"
+    - **browser_redirect_url (str)** -- Original url attempted before redirect
+
+Slow Redirect
+-------------
+
+The :class:`Event <Event>` object in this scenario will have the following attributes:
+
+**Event Attributes:**
+    - **description** -- "Slow HTTP Redirect"
+    - **type (str)** -- "slow-redirect"
+    - **canarytoken (str)** -- Unique string that acts as the Canarytoken
+    - **headers (dict)** -- Headers is a dict, Only present for HTTP Canarytokens.
+    - **url (str)** -- URL of the HTTP Canarytoken.
+    - **logtype (str)** -- "17017"
+    - **browser_redirect_url (str)** -- Original url attempted before redirect
+
+DNS
+---
+
+The :class:`Event <Event>` object in this scenario will have the following attributes:
+
+**Event Attributes:**
+    - **description** -- "DNS"
     - **type (str)** -- "dns"
     - **canarytoken (str)** -- Unique string that acts as the Canarytoken
     - **hostname (dict)** -- Hostname of the DNS Canarytoken.
     - **logtype (str)** -- "16000"
 
+Desktop ini
+-----------
+
+The :class:`Event <Event>` object in this scenario will have the following attributes:
+
+**Event Attributes:**
+    - **description** -- "Windows Directory Browsing"
+    - **type (str)** -- "windows-dir"
+    - **canarytoken (str)** -- Unique string that acts as the Canarytoken
+    - **hostname (dict)** -- Hostname of the DNS Canarytoken.
+    - **logtype (str)** -- "16006"
+
+Adobe Reader PDF
+----------------
+
+The :class:`Event <Event>` object in this scenario will have the following attributes:
+
+**Event Attributes:**
+    - **description** -- "Acrobat Reader PDF Document"
+    - **type (str)** -- "pdf-acrobat-reader"
+    - **canarytoken (str)** -- Unique string that acts as the Canarytoken
+    - **hostname (dict)** -- Hostname of the DNS Canarytoken.
+    - **logtype (str)** -- "16008"
+
+MS Word Doc Macroed
+-------------------
+
+The :class:`Event <Event>` object in this scenario will have the following attributes:
+
+**Event Attributes:**
+    - **description** -- "MS Word .docm Document"
+    - **type (str)** -- "msword-macro"
+    - **canarytoken (str)** -- Unique string that acts as the Canarytoken
+    - **hostname (dict)** -- Hostname of the DNS Canarytoken.
+    - **logtype (str)** -- "16009"
+    - **doc (str)** -- Byte String of the tokened document 
+    - **doc_name (str)** -- Name of the document
+    - **doc_type (str)** -- Type of document chosen (doc or docx)
+
+MS Excel Doc Macroed
+--------------------
+
+The :class:`Event <Event>` object in this scenario will have the following attributes:
+
+**Event Attributes:**
+    - **description** -- "MS Excel .xlsm Document"
+    - **type (str)** -- "msexcel-macro"
+    - **canarytoken (str)** -- Unique string that acts as the Canarytoken
+    - **hostname (dict)** -- Hostname of the DNS Canarytoken.
+    - **logtype (str)** -- "16010"
+    - **doc (str)** -- Byte String of the tokened document 
+    - **doc_name (str)** -- Name of the document
+    - **doc_type (str)** -- Type of document chosen (doc or docx)
+
 Port Scans
-==============
+==========
 There are five types of port scans incidents.
 
 #. A host port scan occurs when a single Canary is port scanned by a single source.
@@ -49,7 +301,7 @@ There are five types of port scans incidents.
 #. An NMAP XMAS scan was run against the Canary.
 
 Host Port Scan
-----------------
+--------------
 
 The :class:`Event <Event>` object in this scenario will have the following attributes:
 
@@ -59,7 +311,7 @@ The :class:`Event <Event>` object in this scenario will have the following attri
     - **logtype (str)** -- "5003"
 
 Consolidated Network Port Scan
---------------------------------
+------------------------------
 
 The :class:`Event <Event>` object in this scenario will have the following attributes:
 
@@ -77,8 +329,8 @@ The :class:`Event <Event>` object in this scenario will have the following attri
     - **description** -- "NMAP NULL Scan Detected"
     - **logtype (str)** -- "5005"
 
-NMAP OS Scan
-----------------
+NMAP OS Scan:
+-------------
 
 
 The :class:`Event <Event>` object in this scenario will have the following attributes:
@@ -88,13 +340,22 @@ The :class:`Event <Event>` object in this scenario will have the following attri
     - **logtype (str)** -- "5004"
 
 NMAP XMAS Scan:
-----------------
+---------------
 
 The :class:`Event <Event>` object in this scenario will have the following attributes:
 
 **Attributes:**
     - **description** -- "NMAP XMAS Scan Detected"
     - **logtype (str)** -- "5006"
+
+NMAP FIN Scan:
+--------------
+
+The :class:`Event <Event>` object in this scenario will have the following attributes:
+
+**Attributes:**
+    - **description** -- "NMAP FIN Scan Detected"
+    - **logtype (str)** -- "5008"
 
 
 Canary Disconnected
@@ -423,3 +684,45 @@ VNC passwords are not transmitted in the clear. Instead a hashed version is sent
     - **password (str)** -- Cracked password if very weak.
     - **server_challenge (str)** -- VNC password hashing parameter.
     - **client_response (str)** -- VNC password hashing parameter.
+
+Console Settings Changed
+========================
+Triggered by a Canary console setting being changed.
+
+**Incident Attributes:**
+    - **description** -- "Console Settings Changed"
+    - **logtype (str)** -- "23001"
+
+**Event Attributes:**
+    - **settings (str)** -- the settings that were changed.
+
+Device Settings Changed
+========================
+Triggered by a Canary's settings being changed.
+
+**Incident Attributes:**
+    - **description** -- "Device Settings Changed"
+    - **logtype (str)** -- "23002"
+
+**Event Attributes:**
+    - **settings (str)** -- the settings that were changed.
+
+Flock Settings Changed
+========================
+Triggered by a flock's settings being changed.
+
+**Incident Attributes:**
+    - **description** -- "Flock Settings Changed"
+    - **logtype (str)** -- "23003"
+
+**Event Attributes:**
+    - **settings (str)** -- the settings that were changed.
+
+Rollback Network Settings
+=========================
+Triggered by a Canary rolling back its settings after an unsuccessful attempt to change
+its network settings.
+
+**Incident Attributes:**
+    - **description** -- "Network Settings Roll-back"
+    - **logtype (str)** -- "22001"
