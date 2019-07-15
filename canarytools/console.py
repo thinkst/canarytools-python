@@ -174,7 +174,7 @@ class Console(object):
             self.log(
                 '[{datetime}] Received {response_code} in {:.2f}ms: {text}'.format(
                     complete * 1000, datetime=datetime.now(self.tz), response_code=r.status_code), data=r.text)
-        except requests.exception.ConnectionError:
+        except requests.exceptions.ConnectionError:
             self.throw_connection_error()
         return self.handle_response(r.json(), parser)
 
