@@ -172,7 +172,7 @@ class Console(object):
             r = self.session.delete(url="{0}{1}".format(ROOT, url), params=params)
             complete = time.time() - start
             self.log(
-                '[{datetime}] Received {response_code} in {:.2f}ms: {text}'.format(
+                '[{datetime}] Received {response_code} in {:.2f}ms: '.format(
                     complete * 1000, datetime=datetime.now(self.tz), response_code=r.status_code), data=r.text)
         except requests.exceptions.ConnectionError:
             self.throw_connection_error()
