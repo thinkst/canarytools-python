@@ -324,6 +324,26 @@ class Incident(CanaryToolsBase):
 
         self.__dict__.update(new_incident.__dict__)
 
+    def to_dict(self):
+        """Convert incident to a dictionary format
+
+        :return: Dictionary value of incident
+        :rtype:  <type 'dict'>
+        """
+        incident_dict = self.__dict__
+        if 'console' in incident_dict.keys():
+            incident_dict.pop('console')
+
+        events_list = []
+        for event in incident_dict['events']:
+            if type(event) != dict:
+                event_dict = event.to_dict()
+                events_list.append(event_dict)
+
+        if events_list != []:
+            incident_dict['events'] = events_list
+
+        return incident_dict
 
 class Event(CanaryToolsBase):
     def __init__(self, console, data):
@@ -400,6 +420,17 @@ class Event(CanaryToolsBase):
             return value[:25] + "... {trimmed}"
         return value
 
+    def to_dict(self):
+        """Convert event to a dictionary format
+
+        :return: Dictionary value of event
+        :rtype:  <type 'dict'>
+        """
+        event_dict = self.__dict__
+        event_dict.pop('console')
+        event_dict['timestamp'] = event_dict['timestamp'].strftime('%Y-%m-%d %H:%M:%S')
+
+        return event_dict
 
 class IncidentDeviceReconnected(Incident):
     """Canary Reconnected"""
