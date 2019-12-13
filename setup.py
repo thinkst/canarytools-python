@@ -10,7 +10,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 setup(
     name='canarytools',
 
-    version='1.0.12',
+    version='1.0.13',
 
     description='An API for the Thinkst Canary Console',
     long_description=long_description,

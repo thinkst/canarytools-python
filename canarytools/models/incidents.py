@@ -431,7 +431,13 @@ class Event(CanaryToolsBase):
         """
         event_dict = self.__dict__
         event_dict.pop('console')
-        event_dict['timestamp'] = event_dict['timestamp'].strftime('%Y-%m-%d %H:%M:%S')
+
+        # It's likely by mistake that we expliclitly include and reformat timestamp field here. This method otherwise
+        # transparently passes on the Event dict. This breaks on the ConsolidatedNetworkPortscan event, whose details
+        # are formatted differently and don't include a timestamp. Instead of removing this, we preserve the behaviour
+        # for customer code that relies on this by reformatting only if it exists.
+        if 'timestamp' in event_dict:
+            event_dict['timestamp'] = event_dict['timestamp'].strftime('%Y-%m-%d %H:%M:%S')
 
         return event_dict
 
