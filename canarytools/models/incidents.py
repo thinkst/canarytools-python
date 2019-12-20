@@ -1,3 +1,4 @@
+import datetime
 from dateutil.parser import parse
 
 from .base import CanaryToolsBase
@@ -15,7 +16,7 @@ class Incidents(object):
 
         :param node_id: Get all incidents for a specific node
         :param event_limit: Specify the maximum number of event logs to be returned with the incident.
-        :param str newer_than: limit to incidents newer than a date like '2019-12-25-12:00:00' (UTC) 
+        :param str newer_than: limit to incidents newer than a date like '2019-12-25-12:00:00' (UTC)
         :return: List of Incident objects
         :rtype: List of :class:`Incident <Incident>` objects
 
@@ -226,7 +227,7 @@ class Incident(CanaryToolsBase):
         # Set only specified fields as attributes
         if key not in ['console', 'id', 'description', 'summary', 'logtype', 'events', \
                        'acknowledged', 'dst_host', 'src_host', 'node_id', 'dst_port', \
-                       'src_port']:
+                       'src_port', 'created_std', 'updated_std']:
             return
 
         # if the key is events parse list of events parse events
@@ -246,6 +247,14 @@ class Incident(CanaryToolsBase):
         # update string bool values
         if key in ['acknowledged']:
             value = value == 'True'
+
+        if key in set(('created_std', 'updated_std')):
+            try:
+                # time format string defined in standardise_datetime on the Console
+                value = datetime.datetime.strptime(value, "%Y-%m-%d %H:%M:%S %Z%z")
+            except ValueError:
+                # leave it as a string
+                pass
 
         super(Incident, self).__setattr__(key, value)
 
