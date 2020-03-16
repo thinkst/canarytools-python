@@ -18,6 +18,9 @@ class CanaryToolsBase(object):
         """
         self.console = console
         if data:
-            # sort data to maintain predictability
-            for attribute, value in sorted(data.items()):
-                setattr(self, attribute, value)
+            if type(data) is dict:
+                # sort data to maintain predictability
+                for attribute, value in sorted(data.items()):
+                    setattr(self, attribute, value)
+            elif type(data) is list:
+                setattr(self, "details", data)
