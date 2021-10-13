@@ -19,7 +19,6 @@ class Flocks(object):
         :return: A Result object
         :rtype: :class:`Result <Result>` object
 
-        :except InvalidParameterError: One of the parameters was invalid
         :except FlockError: Something went wrong while creating the Flock
 
         Usage::
