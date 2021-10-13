@@ -227,7 +227,7 @@ class Incident(CanaryToolsBase):
         # Set only specified fields as attributes
         if key not in ['console', 'id', 'description', 'summary', 'logtype', 'events', \
                        'acknowledged', 'dst_host', 'src_host', 'node_id', 'dst_port', \
-                       'src_port', 'created_std', 'updated_std']:
+                       'src_port', 'created_std', 'updated_std', 'flock_id']:
             return
 
         # if the key is events parse list of events parse events

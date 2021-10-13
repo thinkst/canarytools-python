@@ -57,6 +57,9 @@ class FileNotFound(ConsoleError):
 class CanaryTokenError(ConsoleError):
     """Something went wrong while calling the tokens API"""
 
+class FlockError(ConsoleError):
+    """Something went wrong while calling the tokens API"""
+
 
 class IncidentError(ConsoleError):
     """Something went wrong while working with Incidents"""

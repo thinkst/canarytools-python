@@ -2,7 +2,7 @@ from .console import Console
 
 from .exceptions import ConsoleError, ConfigurationError, InvalidAuthTokenError, ConnectionError, \
     DeviceNotFoundError, IncidentNotFoundError, InvalidParameterError, UpdateError, FileNotFound, \
-    CanaryTokenError, IncidentError
+    CanaryTokenError, IncidentError, FlockError
 
 from .models.incidents import Incident, IncidentDeviceReconnected, IncidentDeviceDied, IncidentFTPLogin, \
     IncidentHTTPLoad, IncidentHTTPLogin, IncidentSSHLogin, IncidentTelnetLogin, IncidentHTTPProxyRequest, \

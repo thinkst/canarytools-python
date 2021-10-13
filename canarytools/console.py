@@ -18,12 +18,13 @@ from .models.devices import Devices
 from .models.incidents import Incidents
 from .models.settings import Settings
 from .models.canarytokens import CanaryTokens
+from .models.flocks import Flocks
 from .models.result import Result
 from .models.update import Updates
 
 from .exceptions import ConfigurationError, ConsoleError, InvalidAuthTokenError, \
     ConnectionError, DeviceNotFoundError, IncidentNotFoundError, InvalidParameterError, \
-    UpdateError, CanaryTokenError
+    UpdateError, CanaryTokenError, FlockError
 
 ROOT = 'https://{0}.canary.tools/api/v1/'
 
@@ -90,6 +91,7 @@ class Console(object):
         self.incidents = Incidents(self)
         self.settings = Settings(self)
         self.tokens = CanaryTokens(self)
+        self.flocks = Flocks(self)
         self.updates = Updates(self)
 
     def ping(self):
@@ -276,4 +278,9 @@ ERROR_MAP = {
     'Could not decode the memo': CanaryTokenError('Could not decode the memo'),
     'Could not delete Canarydrop': CanaryTokenError('Could not delete Canarydrop'),
     'File generation not supported.': CanaryTokenError('File generation not supported.'),
+    'Flock name cannot be empty.': FlockError('Flock name cannot be empty.'),
+    'Flock name longer than maximum (100 characters).': FlockError('Flock name longer than maximum (100 characters).'),
+    'Cannot delete a non-empty flock': FlockError('Cannot delete a non-empty flock'),
+    'Cannot delete default flock': FlockError('Cannot delete default flock'),
+    'Flock does not exist.': FlockError('Flock does not exist.')
 }
