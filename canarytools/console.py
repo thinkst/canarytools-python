@@ -18,6 +18,7 @@ from .models.devices import Devices
 from .models.incidents import Incidents
 from .models.settings import Settings
 from .models.canarytokens import CanaryTokens
+from .models.flocks import Flocks
 from .models.result import Result
 from .models.update import Updates
 
@@ -90,6 +91,7 @@ class Console(object):
         self.incidents = Incidents(self)
         self.settings = Settings(self)
         self.tokens = CanaryTokens(self)
+        self.flocks = Flocks(self)
         self.updates = Updates(self)
 
     def ping(self):
