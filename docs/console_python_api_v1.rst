@@ -74,6 +74,22 @@ a console object and by making calls as follows:
 .. autoclass:: canarytools.models.canarytokens.CanaryTokens
    :members: create, get_token, all
 
+.. _flocks-int-ref:
+
+Flocks Interface
+=================
+API calls for managing Flocks. All methods endpoints are accessed by first initializing
+a console object and by making calls as follows:
+
+.. code-block:: python
+
+   console.flocks.all()
+
+   canarytools.flocks.create(name='Cape Town')
+
+.. autoclass:: canarytools.models.flocks.Flocks
+   :members: create, all
+
 .. _settings-int-ref:
 
 Settings Interface
@@ -105,6 +121,9 @@ specific device. Operations can be performed on these objects too. See below for
 
 .. autoclass:: CanaryToken
    :members: update, delete, disable, enable
+
+.. autoclass:: Flock
+   :members: rename, delete
 
 .. autoclass:: Update
 
