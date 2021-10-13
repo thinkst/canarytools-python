@@ -133,14 +133,26 @@ You can manage your cool Canarytokens with the canarytools library!
 
 Read more at :ref:`tokens-int-ref`.
 
-Settings
+Flocks
 -----------------------
 
-Whitelist devices like scanners and other harmless hosts.
+Flocks are organisation groupings of Canaries.
 
 .. code-block:: python
 
-  # Whitelist IP and destionation port
+  # List Flocks on your Canary Console
+  console.flocks.all()
+
+Read more at :ref:`flocks-int-ref`.
+
+Settings
+-----------------------
+
+Ignorelist devices like scanners and other harmless hosts.
+
+.. code-block:: python
+
+  # Ignorelist IP and destionation port
   console.settings.whitelist_ip_port('10.0.0.2', '5000')
 
 For a complete list of options see :ref:`settings-int-ref`.

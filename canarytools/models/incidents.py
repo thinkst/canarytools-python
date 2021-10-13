@@ -200,6 +200,7 @@ class Incident(CanaryToolsBase):
         **Attributes:**
             - **id (str)** -- The identification code of the incident
             - **description (str)** -- The event description of the incident
+            - **flock_id (str)** -- The id of the flock this incident belongs to
             - **acknowledged (bool)** -- Has the incident been acknowledged?
             - **events (list)** -- List of events
             - **logtype (str)** -- Log type

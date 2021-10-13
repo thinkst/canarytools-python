@@ -12,6 +12,7 @@ from .models.incidents import Incident, IncidentDeviceReconnected, IncidentDevic
     IncidentCanarytokenTriggered, IncidentHostPortScan, IncidentNetworkPortScan, IncidentConsolidatedNetworkPortScan,\
     Event
 from .models.canarytokens import CanaryToken, CanaryTokenKinds
+from .models.flocks import Flock
 from .models.devices import Device
 from .models.databundles import DataBundle
 from .models.update import Update

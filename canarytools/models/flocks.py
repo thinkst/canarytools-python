@@ -70,6 +70,10 @@ class Flock(CanaryToolsBase):
     def __init__(self, console, data):
         """Initialize a Flock object
 
+        **Attributes:**
+            - **flock_id (str)** -- The id the flock
+            - **name (str)** -- The name of the flock
+
         :param console: The Console from which the API calls are made
         :param data: JSON data containing Flock attributes
         """
@@ -96,13 +100,14 @@ class Flock(CanaryToolsBase):
         :rtype: :class:`Result <Result>` object
 
         :except FlockError: Something went wrong while updating the Flock
-        :except InvalidParameterError: The name parameter is invalid
 
         Usage::
 
             >>> import canarytools
-            >>> token = console.tokens.get_token(canarytoken='gv3xjl75b3nr7vwsmvxexcle0')
-            >>> result = token.update(memo='Token in downloads folder')
+            >>> flocks = console.flocks.all()
+            >>> for flock in flocks:
+            >>>     if flock.flock_id == 'flock:id_im_looking_to_rename':
+            >>>         flock.rename("New name")
         """
         params = {'name': self.name, 'flock_id': self.flock_id}
         return self.console.post('flock/rename', params)
@@ -115,7 +120,6 @@ class Flock(CanaryToolsBase):
         :return: A Result object
         :rtype: :class:`Result <Result>` object
 
-        :except InvalidParameterError: One of the parameters was invalid
         :except FlockError: Something went wrong while deleting the Flock
 
         Usage::
