@@ -3,9 +3,9 @@
 Incidents and event attributes
 ********************************
 
-An incident is an alert that gets fired. This groups together any number of events that are worth alerting on. A single SSH Login Attempt incident can be made up of multiple attempts to use different username and password combinations against a Canary. Likewise a single HTTP Login Attempt incident, can be made up of multiple HTTP POST events to a Canary website. The events are bundled together if they occur within a short time of each other and from a single attacker. Brute force attempts on a service then gets grouped together into an incident.
+An incident is an alert that gets fired. This groups together any number of events that are worth alerting on. A single SSH Login Attempt incident can be made up of multiple attempts to use a different username and password combinations against a Canary. Likewise, a single HTTP Login Attempt incident can be made up of multiple HTTP POST events to a Canary website. The events are bundled together if they occur within a short time of each other and from a single attacker. Brute force attempts on a service then get grouped together into an incident.
 
-Each incident object has an **events** attribute storing its list of :class:`Event <Event>` objects. This page describes the different attributes events have depending on their type. Each event also contains an "updated_std" timestamp field, which is omitted for brevity below.
+Each incident object has an **events** attribute storing its list of :class:`Event <Event>` objects. This page describes the different attributes events have depending on their type. Each event also contains a "updated_std" timestamp field, which is omitted for brevity below.
 
 
 Canarytokens incidents
@@ -292,10 +292,10 @@ The :class:`Event <Event>` object in this scenario will have the following attri
 
 Port Scans
 ==========
-There are five types of port scans incidents.
+There are five types of port scan incidents.
 
-#. A host port scan occurs when a single Canary is port scanned by a single source.
-#. A consolidated network port scan occurs when multiple Canaries are scanned by a single source.
+#. A host port scan occurs when a single Canary is a port scanned by a single source.
+#. A consolidated network port scan occurs when the multiple Canaries are scanned by a single source.
 #. An NMAP NULL scan was run against the Canary.
 #. An NMAP OS scan was run against the Canary.
 #. An NMAP XMAS scan was run against the Canary.
@@ -360,7 +360,7 @@ The :class:`Event <Event>` object in this scenario will have the following attri
 
 Canary Disconnected
 ======================
-Event is generated when a Canary does not contact the console within a defined time period.
+An event is generated when a Canary does not contact the console within a defined time period.
 
 The :class:`Incident <Incident>` object in this scenario will have the following attributes:
 
@@ -401,7 +401,7 @@ HTTP Incidents
 ================
 Two types of HTTP Incidents:
 
-#. Page loads, triggered by GET requests. They are disabled by default as they're noisy, and needs to be specifically enabled.
+#. Page loads, triggered by GET requests. They are disabled by default as they're noisy and need to be specifically enabled.
 #. Login attempts, triggered by GET requests. They are always enabled.
 
 HTTP Page Load
@@ -457,7 +457,7 @@ Microsoft SQL Server Login Attempt
 ===================================
 Triggered by any attempt to authenticate to the Microsoft SQL Server module.
 
-SQL Server supports multiple authentication modes, and the fields that come through depend on the mode.
+SQL Server supports multiple authentication modes and the fields that come through depending on the mode.
 
 The :class:`Incident <Incident>` and :class:`Event <Event>` objects will have the following attributes:
 
@@ -473,10 +473,10 @@ The :class:`Incident <Incident>` and :class:`Event <Event>` objects will have th
     - **hostname (str)** -- Optional. Attacker supplied hostname.
     - **domainname (str)** -- Optional. Attacker supplied Active Directory name.
 
-ModBus Request
+Modbus Request
 =================
 
-Triggered by any valid ModBus request.
+Triggered by any valid Modbus request.
 
 The :class:`Incident <Incident>` and :class:`Event <Event>` objects will have the following attributes:
 
@@ -498,7 +498,7 @@ MySQL Login Attempt
 ======================
 Triggered by an authentication attempt against the MySQL service.
 
-The client sends a hashed password, not a cleartext password. The Canary will try crack the hash with passwords one might expect in a brute-force.
+The client sends a hashed password, not a cleartext password. The Canary will try to crack the hash with passwords one might expect in a brute-force.
 
 The :class:`Incident <Incident>` and :class:`Event <Event>` objects will have the following attributes:
 
@@ -549,7 +549,7 @@ The :class:`Incident <Incident>` and :class:`Event <Event>` objects will have th
 
 SIP Request
 =============
-Triggered by an attacker connecting to the SIP service and issuing valid SIP request.
+Triggered by an attacker connecting to the SIP service and issuing a valid SIP request.
 
 The :class:`Incident <Incident>` and :class:`Event <Event>` objects will have the following attributes:
 
@@ -626,7 +626,7 @@ The :class:`Incident <Incident>` and :class:`Event <Event>` objects will have th
 Custom TCP Service Request
 ============================
 
-The Custom TCP Service module let's the Canary administrator create simple services that either immediately print a banner on connection, or wait for the client to send data before responding.
+The Custom TCP Service module lets the Canary administrator create simple services that either immediately prints a banner on connection, or wait for the client to send data before responding.
 
 The :class:`Incident <Incident>` and :class:`Event <Event>` objects will have the following attributes:
 
@@ -637,7 +637,7 @@ The :class:`Incident <Incident>` and :class:`Event <Event>` objects will have th
 **Event Attributes:**
     - **banner_id (str)** -- Multiple banners are supported, the id identifies which banner service was triggered.
     - **data (str)** -- Optional. Attacker's supplied data.
-    - **function (str)** -- Indicates which trigger fired, either 'DATA_RECEIVED' for when a banner was sent after the attacker sent data, or 'CONNECTION_MADE' for when a banner was sent immediately on connection.
+    - **function (str)** -- Indicates which trigger fired, either 'DATA_RECEIVED' for when a banner was sent after the attacker sent data or 'CONNECTION_MADE' for when a banner was sent immediately on connection.
     - **logtype (str)** -- "20001" (Banner set immediately on connection)
     - **logtype (str)** -- "20002" (Banner sent after client sent a line)
 
@@ -672,9 +672,9 @@ The :class:`Incident <Incident>` and :class:`Event <Event>` objects will have th
 
 VNC Login Attempt
 ====================
-Triggered by an attempt to login to Canary's password protected VNC service.
+Triggered by an attempt to log in to Canary's password-protected VNC service.
 
-VNC passwords are not transmitted in the clear. Instead a hashed version is sent. The Canary will test the hashed password against a handful of common passwords to guess the password, but the hash parameters are also reported so the administrator can crack the hash on more powerful rigs.
+VNC passwords are not transmitted in the clear. Instead, a hashed version is sent. The Canary will test the hashed password against a handful of common passwords to guess the password, but the hash parameters are also reported so the administrator can crack the hash on more powerful rigs.
 
 **Incident Attributes:**
     - **description** -- "VNC Login Attempt"
