@@ -5,7 +5,7 @@
 
 .. image:: _static/images/logo_canary@2x.png
 
-Welcome to canarytools's documentation!
+Welcome to canarytools' documentation!
 =======================================
 
 This Python library wraps the Canarytools API, for deploying and managing `Thinkst Canary honeypots <https://canary.tools>`_.
@@ -39,15 +39,15 @@ All uses of the Canary Console API start by importing the library module and ins
 
 Alternatively, you can download a configuration file from your console's *Canary Console API* settings tab.
 Place this file in your home directory (*~/* for Unix environments and *C:\\Users\\{Current User}\\*
-for Windows Environments). With this file in place you can instantiate the ``Console`` class without needing the API
-token nor the domain anywhere in your code.
+for Windows Environments). With this file in place, you can instantiate the ``Console`` class without needing the API
+token or the domain anywhere in your code.
 
 .. code-block:: python
 
     import canarytools
     client = canarytools.Console()
 
-You may also specify the timezone to be used to format time specific data.
+You may also specify the timezone to be used to format time-specific data.
 
 .. code-block:: python
 
@@ -94,7 +94,7 @@ Keep a handle on incidents. Want to quickly acknowledge a large batch? No proble
   # Acknowledge all incidents for a device older than 3 days
   console.incidents.acknowledge(node_id='329921d242c30b5e', older_than='3d')
 
-Perhaps you'd just like to do a large clean up of a specific incident type? Don't forget to acknowledge before deleting!
+Perhaps you'd just like to do a large clean-up of a specific incident type? Don't forget to acknowledge before deleting!
 
 .. code-block:: python
 
