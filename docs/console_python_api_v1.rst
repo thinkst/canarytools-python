@@ -110,8 +110,8 @@ Returned Classes
 =======================
 
 This section describes the objects returned from the various interfaces described above. These objects
-represent console entities. For example the :class:`Device <Device>` object encapsulates all the information related to
-specific device. Operations can be performed on these objects too. See below for more information.
+represent console entities. For example, the :class:`Device <Device>` object encapsulates all the information related to
+a specific device. Operations can be performed on these objects too. See below for more information.
 
 .. autoclass:: Device
    :members: reboot, update, list_databundles, refresh
