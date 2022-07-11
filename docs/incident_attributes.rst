@@ -3,7 +3,7 @@
 Incidents and event attributes
 ********************************
 
-An incident is an alert that gets fired. This groups together any number of events that are worth alerting on. A single SSH Login Attempt incident can be made up of multiple attempts to use a different username and password combinations against a Canary. Likewise, a single HTTP Login Attempt incident can be made up of multiple HTTP POST events to a Canary website. The events are bundled together if they occur within a short time of each other and from a single attacker. Brute force attempts on a service then get grouped together into an incident.
+An incident is an alert that gets fired. This groups together any number of events that are worth alerting on. A single SSH Login Attempt incident can be made up of multiple attempts that use different username and password combinations against a Canary. Likewise, a single HTTP Login Attempt incident can be made up of multiple HTTP POST events to a Canary website. The events are bundled together if they occur within a short time of each other and from a single attacker. Brute force attempts on a service then get grouped together into an incident.
 
 Each incident object has an **events** attribute storing its list of :class:`Event <Event>` objects. This page describes the different attributes events have depending on their type. Each event also contains a "updated_std" timestamp field, which is omitted for brevity below.
 
