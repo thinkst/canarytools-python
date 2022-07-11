@@ -294,8 +294,8 @@ Port Scans
 ==========
 There are five types of port scan incidents.
 
-#. A host port scan occurs when a single Canary is a port scanned by a single source.
-#. A consolidated network port scan occurs when the multiple Canaries are scanned by a single source.
+#. A host port scan occurs when a single Canary is port scanned by a single source.
+#. A consolidated network port scan occurs when multiple Canaries are scanned by a single source.
 #. An NMAP NULL scan was run against the Canary.
 #. An NMAP OS scan was run against the Canary.
 #. An NMAP XMAS scan was run against the Canary.
