@@ -360,7 +360,7 @@ The :class:`Event <Event>` object in this scenario will have the following attri
 
 Canary Disconnected
 ======================
-An event is generated when a Canary does not contact the console within a defined time period.
+A Disconnect event is generated when a Canary does not contact the console within a defined time period.
 
 The :class:`Incident <Incident>` object in this scenario will have the following attributes:
 
