@@ -457,7 +457,7 @@ Microsoft SQL Server Login Attempt
 ===================================
 Triggered by any attempt to authenticate to the Microsoft SQL Server module.
 
-SQL Server supports multiple authentication modes and the fields that come through depending on the mode.
+SQL Server supports multiple authentication modes and the fields that come through depend on the mode.
 
 The :class:`Incident <Incident>` and :class:`Event <Event>` objects will have the following attributes:
 
