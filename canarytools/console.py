@@ -159,6 +159,7 @@ class Console(object):
         except requests.exceptions.ConnectionError:
             self.throw_connection_error()
         if raw_resp:
+            resp.raise_for_status()
             return resp
         return self.handle_response(resp.json(), parser)
 
