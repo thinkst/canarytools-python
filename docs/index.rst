@@ -35,7 +35,7 @@ All uses of the Canary Console API start by importing the library module and ins
 .. code-block:: python
 
     import canarytools
-    client = canarytools.Console('YOUR_DOMAIN', 'YOUR_API_KEY')
+    console = canarytools.Console('YOUR_DOMAIN', 'YOUR_API_KEY')
 
 Alternatively, you can download a configuration file from your console's *Canary Console API* settings tab.
 Place this file in your home directory (*~/* for Unix environments and *C:\\Users\\{Current User}\\*
@@ -45,7 +45,7 @@ token or the domain anywhere in your code.
 .. code-block:: python
 
     import canarytools
-    client = canarytools.Console()
+    console = canarytools.Console()
 
 You may also specify the timezone to be used to format time-specific data.
 

@@ -12,15 +12,33 @@ class CanaryTokens(object):
         """
         self.console = console
 
-    def create(self, memo, kind, web_image=None, cloned_web=None, mimetype=None):
+    def create(
+        self, 
+        memo, 
+        kind, 
+        web_image=None, 
+        mimetype=None, 
+        cloned_web=None, 
+        browser_redirect_url=None,
+        s3_source_bucket=None,
+        s3_log_bucket=None,
+        process_name=None,
+        ):
         """Create a new Canarytoken
 
         :param memo: Use this to remind yourself where you placed the Canarytoken
-        :param kind: The type of Canarytoken. Supported classes currently are: http, dns,
-            cloned-web, doc-msword
+        :param kind: The type of Canarytoken. Supported classes currently are: 
+            aws-id, cloned-web, dns, doc-msword, http, 
+            doc-msexcel, msexcel-macro, doc-msword, msword-macro, 
+            pdf-acrobat-reader, qr-code, sensitive-cmd, signed-exe, 
+            slack-api, web-image, windows-dir, wireguard
         :param web_image: The path to an image file for use with web-image tokens.
-        :param cloned_web: Domain to be used in clonded-web tokens
         :param mimetype: The type of image specified in web_image. e.g. 'image/png'
+        :param cloned_web: Domain to be used in cloned-web tokens
+        :param browser_redirect_url: URL to redirect attackers to after triggering token (required when creating fast-redirect and slow-redirect tokens)
+        :param s3_source_bucket: S3 bucket to monitor for access (required when creating aws-s3 tokens)
+        :param s3_log_bucket: S3 bucket where logs will be stored (required when creating aws-s3 tokens)
+        :param process_name: Name of the process you want to monitor (required when creating sensitive-cmd tokens)
         :return: A Result object
         :rtype: :class:`Result <Result>` object
 
@@ -32,7 +50,21 @@ class CanaryTokens(object):
             >>> import canarytools
             >>> result = console.tokens.create(memo='Desktop Token', kind=canarytools.CanaryTokenKinds.DOC_MSWORD)
         """
-        params = {'memo': memo, 'kind': kind, 'cloned_web': cloned_web}
+        params = {'memo': memo, 'kind': kind}
+        if cloned_web:
+            params['cloned_web'] = cloned_web
+
+        if browser_redirect_url:
+            params['browser_redirect_url'] = browser_redirect_url
+
+        if s3_source_bucket:
+            params['s3_source_bucket'] = s3_source_bucket
+
+        if s3_log_bucket:
+            params['s3_log_bucket'] = s3_log_bucket
+
+        if process_name:
+            params['process_name'] = process_name
 
         # load image and send
         if web_image:
@@ -141,7 +173,6 @@ class CanaryToken(CanaryToolsBase):
     def delete(self):
         """Delete a Canarytoken
 
-        :param canarytoken: The key of the Canarytoken to be deleted
         :return: A Result object
         :rtype: :class:`Result <Result>` object
 
@@ -159,7 +190,6 @@ class CanaryToken(CanaryToolsBase):
     def disable(self):
         """Disable a Canarytoken
 
-        :param canarytoken: The key of the Canarytoken
         :return: A Result object
         :rtype: :class:`Result <Result>` object
 
@@ -177,7 +207,6 @@ class CanaryToken(CanaryToolsBase):
     def enable(self):
         """Enable a Canarytoken
 
-        :param canarytoken: The key of the Canarytoken
         :return: A Result object
         :rtype: :class:`Result <Result>` object
 
@@ -191,24 +220,54 @@ class CanaryToken(CanaryToolsBase):
         """
         params = {'canarytoken': self.canarytoken}
         return self.console.post('canarytoken/enable', params)
+    
+    def download(self, filename=None):
+        """Download a Canarytoken
+
+        :param filename: Optional target filename. The console should provide a default value.
+        :return: The filename written to.
+        :rtype: :class:`str`
+
+        :except CanaryTokenError: Something went wrong while downloading the CanaryToken.
+        :except ValueError: This token doesn't have a default filename, you need to provide one.
+
+        Usage::
+
+            >>> import canarytools
+            >>> token = console.tokens.create(memo="Excel file on Jim's Laptop", kind="doc-msexcel")
+            >>> token.download(filename="Payroll.xslx")
+            OR
+            >>> filename = token.download()
+        """
+        resp = self.console.get('canarytoken/download', {'canarytoken': self.canarytoken}, raw_resp=True)
+        disp = resp.headers['Content-Disposition'].split('filename=')
+        if not filename:
+            if len(disp) == 2 and disp[0] == 'attachment; ':
+                filename = disp[-1]
+            else:
+                raise ValueError('CanaryToken.download() requires filename for this token')
+        with open(filename, 'wb') as fd:
+            fd.write(resp.content)
+        return filename
 
 
 class CanaryTokenKinds(object):
-    HTTP = 'http'
-    DNS = 'dns'
-    CLONED_WEB = 'cloned-web'
-    DOC_MSWORD = 'doc-msword'
-    WEB_IMAGE = 'web-image'
-    WINDOWS_DIR = 'windows-dir'
     AWS = 'aws-id'
     AWSS3 = 'aws-s3'
-    MSWORD = 'doc-msword'
-    SIGNEDEXE = 'signed-exe'
-    QRCODE = 'qr-code'
-    SVN = 'svn'
-    SQL = 'sql'
-    PDF = 'pdf-acrobat-reader'
+    CLONED_WEB = 'cloned-web'
+    DNS = 'dns'
+    DOC_MSWORD = 'doc-msword'
     FASTREDIRECT = 'fast-redirect'
-    SLOWREDIRECT = 'slow-redirect'
-    MSWORDMACRO = 'msword-macro'
+    HTTP = 'http'
+    MSEXCEL = 'doc-msexcel'
     MSEXCELMACRO = 'msexcel-macro'
+    MSWORD = 'doc-msword'
+    MSWORDMACRO = 'msword-macro'
+    PDF = 'pdf-acrobat-reader'
+    QRCODE = 'qr-code'
+    SIGNEDEXE = 'signed-exe'
+    SLACK = 'slack-api'
+    SLOWREDIRECT = 'slow-redirect'
+    WEB_IMAGE = 'web-image'
+    WINDOWS_DIR = 'windows-dir'
+    WIREGUARD = 'wireguard'

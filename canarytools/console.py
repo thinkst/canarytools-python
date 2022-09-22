@@ -138,12 +138,13 @@ class Console(object):
             self.throw_connection_error()
         return self.handle_response(r.json(), parser)
 
-    def get(self, url, params, parser=None):
+    def get(self, url, params, parser=None, raw_resp=False):
         """Get request
 
         :param url: Url of the API endpoint
         :param params: List of parameters to be sent
         :param parser: The function used to parse JSON data into an specific object
+        :param raw_resp: If False, handle the response before returning, otherwise return raw response (e.g. for download)
         :return: Object(s) or a Result Indicator Object
         """
         try:
@@ -157,6 +158,9 @@ class Console(object):
                     complete * 1000, datetime=datetime.now(self.tz), response_code=resp.status_code), data=resp.text)
         except requests.exceptions.ConnectionError:
             self.throw_connection_error()
+        if raw_resp:
+            resp.raise_for_status()
+            return resp
         return self.handle_response(resp.json(), parser)
 
     def delete(self, url, params, parser=None):
