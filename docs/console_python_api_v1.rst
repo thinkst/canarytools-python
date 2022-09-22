@@ -120,7 +120,7 @@ a specific device. Operations can be performed on these objects too. See below f
    :members: unacknowledge, acknowledge, delete, refresh
 
 .. autoclass:: CanaryToken
-   :members: update, delete, disable, enable
+   :members: update, delete, disable, enable, download
 
 .. autoclass:: Flock
    :members: rename, delete
