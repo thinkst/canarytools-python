@@ -1,3 +1,4 @@
+from copy import deepcopy
 import datetime
 from dateutil.parser import parse
 
@@ -343,7 +344,7 @@ class Incident(CanaryToolsBase):
         :return: Dictionary value of incident
         :rtype:  <type 'dict'>
         """
-        incident_dict = self.__dict__
+        incident_dict = deepcopy(self.__dict__)
         if 'console' in incident_dict.keys():
             incident_dict.pop('console')
 
@@ -439,7 +440,7 @@ class Event(CanaryToolsBase):
         :return: Dictionary value of event
         :rtype:  <type 'dict'>
         """
-        event_dict = self.__dict__
+        event_dict = deepcopy(self.__dict__)
         event_dict.pop('console')
 
         # It's likely by mistake that we expliclitly include and reformat timestamp field here. This method otherwise
