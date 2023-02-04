@@ -53,6 +53,9 @@ class CanaryTokens(object):
             >>> result = console.tokens.create(memo='Desktop Token', kind=canarytools.CanaryTokenKinds.DOC_MSWORD)
         """
         params = {'memo': memo, 'kind': kind}
+        if flock_id:
+            params['flock_id'] = flock_id
+
         if cloned_web:
             params['cloned_web'] = cloned_web
 
