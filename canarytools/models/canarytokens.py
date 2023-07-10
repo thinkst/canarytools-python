@@ -16,6 +16,7 @@ class CanaryTokens(object):
         self, 
         memo, 
         kind, 
+        flock_id=None,
         web_image=None, 
         mimetype=None, 
         cloned_web=None, 
@@ -27,6 +28,7 @@ class CanaryTokens(object):
         """Create a new Canarytoken
 
         :param memo: Use this to remind yourself where you placed the Canarytoken
+        :param flock_id: Create token in different flock. Defaults to: 'flock:default'
         :param kind: The type of Canarytoken. Supported classes currently are: 
             aws-id, cloned-web, dns, doc-msword, http, 
             doc-msexcel, msexcel-macro, doc-msword, msword-macro, 
@@ -51,6 +53,9 @@ class CanaryTokens(object):
             >>> result = console.tokens.create(memo='Desktop Token', kind=canarytools.CanaryTokenKinds.DOC_MSWORD)
         """
         params = {'memo': memo, 'kind': kind}
+        if flock_id:
+            params['flock_id'] = flock_id
+
         if cloned_web:
             params['cloned_web'] = cloned_web
 
