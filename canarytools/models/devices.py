@@ -1,4 +1,6 @@
 from .base import CanaryToolsBase
+from .result import Result
+
 from .databundles import DataBundles
 
 from dateutil.parser import parse
@@ -54,7 +56,7 @@ class Devices(object):
         params = {'tz': self.console.tz}
         return self.console.get('devices/dead', params, self.parse)
 
-    def get_device(self, node_id):
+    def get_device(self, node_id, settings = False):
         """Get information on a particular device
 
         :param node_id: Get device with specific node id
@@ -68,7 +70,7 @@ class Devices(object):
             >>> import canarytools
             >>> device = console.devices.get_device(node_id='0000000000231c23')
         """
-        params = {'node_id': node_id}
+        params = {'node_id': node_id, 'settings': settings}
         return self.console.get('device/getinfo', params, self.parse)
 
     def parse(self, data):
@@ -265,3 +267,23 @@ class Device(CanaryToolsBase):
         device = devices.get_device(self.node_id)
 
         self.__dict__.update(device.__dict__)
+    
+    def settings(self) -> dict:
+        """Get a device's settings
+
+        :except DeviceNotFoundError: The device could not be found
+        :return: Result object
+        :rtype: :class:`Result <Result>` object
+
+        Usage::
+
+            >>> import canarytools
+            >>> device = console.devices.get_device(node_id='0000000000231c23')
+            >>> settings = device.settings()
+            >>> getattr(settings, 'http.enabled')
+        """
+        devices = Devices(self.console)
+        device = devices.get_device(self.node_id, True)
+
+        self.__dict__.update(device.__dict__)
+        return Result(self.console, self.settings)
