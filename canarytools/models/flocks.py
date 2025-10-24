@@ -112,11 +112,32 @@ class Flock(CanaryToolsBase):
         params = {'name': self.name, 'flock_id': self.flock_id}
         return self.console.post('flock/rename', params)
 
+    def devices(self):
+        """Get a Flock's Devices
+
+        :return: List of all devices in that flock
+        :rtype: List of :class:`Device <Device>` objects
+
+        Usage::
+
+            >>> import canarytools
+            >>> flocks = console.flocks.all()
+            >>> for flock in flocks:
+            >>>     devices = flock.devices()
+        """
+        params = {'flock_id': self.flock_id}
+        res = self.console.get('flock/list', params)
+        sensors = res.sensors
+        node_ids = [[n for n in sensors if len(n) == 16]]
+        devs = []
+        for n in node_ids:
+            devs.append(self.console.devices.get_device(n))
+        return devs
+
 
     def delete(self):
         """Delete a Flock
 
-        :param flock_id: Unique identifier for your Flock
         :return: A Result object
         :rtype: :class:`Result <Result>` object
 
@@ -125,7 +146,7 @@ class Flock(CanaryToolsBase):
         Usage::
 
             >>> import canarytools
-            >>> result = console.flocks.delete(flock_id='flock:0bd349d8514a8256a0f1c8e6acf77cf0')
+            >>> result = console.flocks.delete()
         """
         params = {'flock_id': self.flock_id}
 
