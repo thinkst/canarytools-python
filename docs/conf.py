@@ -167,5 +167,5 @@ autodoc_docstring_signature = True
 add_module_names = False
 
 def setup(app):
-    app.add_stylesheet('css/style.css')
+    app.add_css_file('css/style.css')
 
