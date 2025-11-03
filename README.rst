@@ -12,7 +12,7 @@ The Python Canary API Wrapper allows access to the Canary Web API.
 Installation
 ------------
 
-The API is supported on python 2.7. The recommended way to
+The API is supported on Python 2.7+, or 3.3+. The recommended way to
 install the API Wrapper is via `pip <https://pypi.python.org/pypi/pip>`_.
 
 .. code-block:: bash
