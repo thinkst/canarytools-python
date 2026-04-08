@@ -25,6 +25,7 @@ class CanaryTokens(object):
         s3_log_bucket=None,
         process_name=None,
         expected_referrer=None,
+        azure_id_cert_file_name=None,
         ):
         """Create a new Canarytoken
 
@@ -75,6 +76,9 @@ class CanaryTokens(object):
 
         if expected_referrer:
             params['expected_referrer'] = expected_referrer
+        
+        if azure_id_cert_file_name:
+            params['azure_id_cert_file_name'] = azure_id_cert_file_name
 
         # load image and send
         if web_image:
@@ -263,6 +267,7 @@ class CanaryToken(CanaryToolsBase):
 
 class CanaryTokenKinds(object):
     AWS = 'aws-id'
+    AZURE_ID = 'azure-id'
     AWSS3 = 'aws-s3'
     CLONED_CSS = 'cloned-css'
     CLONED_WEB = 'cloned-web'
