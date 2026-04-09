@@ -32,7 +32,7 @@ class CanaryTokens(object):
         :param memo: Use this to remind yourself where you placed the Canarytoken
         :param flock_id: Create token in different flock. Defaults to: 'flock:default'
         :param kind: The type of Canarytoken. Supported classes currently are: 
-            aws-id, cloned-web, cloned-css, dns, doc-msword, http,
+            aws-id, azure-id, cloned-web, cloned-css, dns, doc-msword, http,
             doc-msexcel, msexcel-macro, doc-msword, msword-macro, 
             pdf-acrobat-reader, qr-code, sensitive-cmd, signed-exe, 
             slack-api, web-image, windows-dir, wireguard
@@ -44,6 +44,7 @@ class CanaryTokens(object):
         :param s3_log_bucket: S3 bucket where logs will be stored (required when creating aws-s3 tokens)
         :param process_name: Name of the process you want to monitor (required when creating sensitive-cmd tokens)
         :param expected_referrer: Domain to be used in cloned-css tokens
+        :param azure_id_cert_file_name: Name of the azure login certificate file to be used in azure-id tokens, e.g. prod.pem
         :return: A Result object
         :rtype: :class:`Result <Result>` object
 
