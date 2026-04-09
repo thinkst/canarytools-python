@@ -21,4 +21,4 @@ from .models.settings import Settings
 
 
 __author__ = 'Thinkst Applied Research'
-__version__ = '1.2.1'
+__version__ = '1.2.2'
