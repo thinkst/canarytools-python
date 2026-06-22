@@ -6,6 +6,8 @@ from ..exceptions import InvalidParameterError
 import logging
 logger = logging.getLogger('canarytools')
 
+CANARYTOKENS_FETCH_PAGE_SIZE_LIMIT = 5000
+
 class CanaryTokens(object):
     def __init__(self, console):
         """Initialize CanaryToken
@@ -125,7 +127,7 @@ class CanaryTokens(object):
         return self.console.get('canarytoken/fetch', params, self.parse)
 
     def all(self, include_endpoints=True):
-        """Fetch all Canarytokens
+        """Fetch all Canarytokens using the paginate endpoint
 
         :return: A list of Canarytoken objects
         :rtype: List of :class:`CanaryToken <CanaryToken>` objects
@@ -137,8 +139,36 @@ class CanaryTokens(object):
             >>> import canarytools
             >>> tokens = console.tokens.all()
         """
-        params = {'include_endpoints': str(include_endpoints)}
-        return self.console.get('canarytokens/fetch', params, self.parse)
+        cursor = None
+        all_tokens = []
+
+        while True:
+            params = {
+                'limit': CANARYTOKENS_FETCH_PAGE_SIZE_LIMIT,
+                'render_transients': str(include_endpoints),
+            }
+            if cursor:
+                params['cursor'] = cursor
+
+            page_data = self.console.get('canarytokens/paginate', params, parser=lambda data: data)
+            page_tokens = page_data.get('canarytokens', [])
+
+            for token in page_tokens:
+                all_tokens.append(CanaryToken.parse(self.console, token))
+
+            if len(page_tokens) < CANARYTOKENS_FETCH_PAGE_SIZE_LIMIT:
+                break
+
+            cursor_data = page_data.get('cursor')
+            if isinstance(cursor_data, dict):
+                cursor = cursor_data.get('next')
+            else:
+                cursor = cursor_data
+
+            if not cursor:
+                break
+
+        return all_tokens
 
     def parse(self, data):
         """Parse JSON data
