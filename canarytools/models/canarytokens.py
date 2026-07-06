@@ -127,7 +127,7 @@ class CanaryTokens(object):
         return self.console.get('canarytoken/fetch', params, self.parse)
 
     def all(self, include_endpoints=True):
-        """Fetch all Canarytokens in batches using the paginate endpoint
+        """Fetch all Canarytokens
 
         :return: A list of Canarytoken objects
         :rtype: List of :class:`CanaryToken <CanaryToken>` objects
@@ -158,7 +158,7 @@ class CanaryTokens(object):
                 for token in response.get('canarytokens', [])
             )
 
-            cursor = (response.get('cursor') or {}).get('next')
+            cursor = response.get('cursor', {})
             if not cursor:
                 break
 
