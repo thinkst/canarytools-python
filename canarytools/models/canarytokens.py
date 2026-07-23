@@ -6,6 +6,8 @@ from ..exceptions import InvalidParameterError
 import logging
 logger = logging.getLogger('canarytools')
 
+CANARYTOKENS_PAGE_SIZE_LIMIT = 2500
+
 class CanaryTokens(object):
     def __init__(self, console):
         """Initialize CanaryToken
@@ -137,8 +139,30 @@ class CanaryTokens(object):
             >>> import canarytools
             >>> tokens = console.tokens.all()
         """
-        params = {'include_endpoints': str(include_endpoints)}
-        return self.console.get('canarytokens/fetch', params, self.parse)
+        cursor = None
+        all_tokens = []
+
+        while True:
+            params = {
+                'limit': CANARYTOKENS_PAGE_SIZE_LIMIT,
+                'render_transients': str(include_endpoints),
+            }
+
+            if cursor:
+                params['cursor'] = cursor
+
+            response = self.console.get('canarytokens/paginate', params, parser=dict)
+
+            all_tokens.extend(
+                CanaryToken.parse(self.console, token)
+                for token in response.get('canarytokens', [])
+            )
+
+            cursor = response.get('cursor', {})
+            if not cursor:
+                break
+
+        return all_tokens
 
     def parse(self, data):
         """Parse JSON data
