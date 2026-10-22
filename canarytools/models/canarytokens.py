@@ -158,7 +158,7 @@ class CanaryTokens(object):
                 for token in response.get('canarytokens', [])
             )
 
-            cursor = response.get('cursor', {})
+            cursor = response.get('cursor', {}).get('next')
             if not cursor:
                 break
 
